@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梦巡司 · 角色造型图集</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0a0a14;color:#ede4d4;font-family:"PingFang SC","Noto Serif SC","STSong","Songti SC",serif;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#0a0a14}
+::-webkit-scrollbar-thumb{background:rgba(180,160,120,.25);border-radius:3px}
+
+/* ===== Sidebar ===== */
+.sidebar{position:fixed;top:0;left:0;width:200px;height:100vh;background:linear-gradient(180deg,#0d0d1f 0%,#0a0a14 100%);border-right:1px solid rgba(180,160,120,.08);z-index:100;overflow-y:auto;padding-bottom:40px}
+.sidebar-logo{padding:32px 20px 24px;text-align:center}
+.sidebar-logo .title{font-size:20px;font-weight:700;color:#e0d4b8;letter-spacing:.12em;text-shadow:0 0 30px rgba(200,160,80,.3)}
+.sidebar-logo .sub{font-size:11px;color:rgba(200,170,120,.45);letter-spacing:.15em;margin-top:6px}
+.sidebar-nav{padding:0 16px}
+.sidebar-nav a{display:block;padding:8px 14px;font-size:13px;color:rgba(200,180,150,.55);text-decoration:none;border-radius:4px;transition:all .2s;margin-bottom:2px}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:#e0d4b8;background:rgba(200,160,80,.08)}
+.sidebar-nav .nav-major{font-size:11px;color:rgba(200,170,120,.4);letter-spacing:.15em;padding:18px 14px 4px;border-top:1px solid rgba(180,160,120,.08);margin-top:4px}
+
+/* ===== Main ===== */
+.main{margin-left:200px;min-height:100vh}
+.container{max-width:1400px;margin:0 auto;padding:0 32px}
+.hero{padding:60px 0 40px;text-align:center}
+.hero h1{font-size:48px;font-weight:700;color:#e0d4b8;letter-spacing:.2em;text-shadow:0 0 60px rgba(200,160,80,.25);margin-bottom:8px}
+.hero .subtitle{font-size:14px;color:rgba(200,180,150,.5);letter-spacing:.25em}
+.hero .project-info{font-size:12px;color:rgba(180,160,120,.35);margin-top:12px;letter-spacing:.1em}
+
+/* ===== Core Concept ===== */
+.concept-block{max-width:900px;margin:0 auto 50px;text-align:center}
+.concept-block .definition{font-size:16px;color:#d4c8a8;line-height:2;padding:20px 0;font-style:italic}
+.concept-block .tone-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px}
+.concept-block .tone-tags span{font-size:11px;color:rgba(200,170,120,.5);border:1px solid rgba(180,160,120,.15);padding:4px 14px;border-radius:20px;letter-spacing:.08em}
+
+/* ===== Bible ===== */
+.bible-core{max-width:900px;margin:0 auto 40px;text-align:center}
+.bible-definition{font-size:14px;color:rgba(210,190,160,.65);line-height:1.9;margin-bottom:16px;letter-spacing:.06em}
+.bible-toggle{background:rgba(200,160,80,.06);border:1px solid rgba(180,160,120,.15);color:rgba(200,170,120,.6);font-size:12px;padding:8px 24px;border-radius:20px;cursor:pointer;font-family:inherit;letter-spacing:.1em;transition:all .2s}
+.bible-toggle:hover{background:rgba(200,160,80,.12);color:#d4c8a8}
+.bible-detail{display:none;text-align:left;max-width:800px;margin:24px auto 0;padding:24px 28px;background:rgba(255,255,255,.015);border:1px solid rgba(180,160,120,.08);border-radius:6px;font-size:13px;color:rgba(200,180,150,.55);line-height:2}
+.bible-detail.active{display:block}
+.bible-detail .copy-btn{display:inline-block;background:rgba(200,160,80,.1);border:1px solid rgba(180,160,120,.2);color:rgba(200,170,120,.6);font-size:11px;padding:4px 14px;border-radius:4px;cursor:pointer;margin:12px 0 0;font-family:inherit;transition:all .2s}
+.bible-detail .copy-btn:hover{background:rgba(200,160,80,.18);color:#d4c8a8}
+
+/* ===== Category Divider ===== */
+.cat-divider{max-width:1400px;margin:60px auto 20px;padding:0 24px;display:flex;align-items:center;gap:16px}
+.cat-divider .line{flex:1;height:1px;background:rgba(180,160,120,.1)}
+.cat-divider .cat-label{font-size:13px;letter-spacing:.25em;color:rgba(180,150,100,.4);white-space:nowrap}
+
+/* ===== Section Title ===== */
+.section-title{max-width:1400px;margin:50px auto 24px;padding:0 24px;display:flex;align-items:center;gap:14px}
+.section-title .line{flex:1;height:1px;background:rgba(180,160,120,.12)}
+.section-title .label{font-size:14px;color:rgba(210,190,160,.55);letter-spacing:.15em;white-space:nowrap}
+
+/* ===== Card Grid ===== */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:20px;max-width:1400px;margin:0 auto 60px;padding:0 24px}
+.card{background:#111524;border:1px solid rgba(180,160,120,.08);border-radius:4px;overflow:hidden;cursor:pointer;transition:all .3s}
+.card:hover{border-color:rgba(200,160,80,.25);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.card img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+.card-info{padding:12px 16px 16px}
+.card-name{font-size:16px;color:#d4c8a8;margin-bottom:4px}
+.card-desc{font-size:13px;color:rgba(210,190,160,.45)}
+
+/* ===== Lightbox ===== */
+.lightbox-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center}
+.lightbox-overlay.active{display:flex}
+.lightbox-overlay img{max-width:90vw;max-height:90vh;object-fit:contain;border:1px solid rgba(180,160,120,.1)}
+.lightbox-close{position:fixed;top:20px;right:30px;font-size:32px;color:rgba(200,180,150,.5);cursor:pointer;z-index:10000;transition:color .2s}
+.lightbox-close:hover{color:#e0d4b8}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);font-size:40px;color:rgba(200,180,150,.4);cursor:pointer;z-index:10000;user-select:none;transition:color .2s}
+.lightbox-nav:hover{color:#e0d4b8}
+.lightbox-nav.prev{left:30px}
+.lightbox-nav.next{right:30px}
+
+/* ===== Footer ===== */
+.footer{text-align:center;padding:40px 24px 60px;color:rgba(180,160,120,.3);font-size:11px;letter-spacing:.1em}
+
+/* ===== Placeholder ===== */
+.placeholder-card{display:flex;align-items:center;justify-content:center;background:#111524;border:1px dashed rgba(180,160,120,.1);border-radius:4px;aspect-ratio:3/4;min-height:300px}
+.placeholder-card .text{font-size:13px;color:rgba(180,160,120,.25);letter-spacing:.15em}
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="title">梦 巡 司</div>
+    <div class="sub">DREAM PATROL</div>
+  </div>
+  <div class="sidebar-nav">
+    <a href="#top" data-nav="top">▸ 页面顶部</a>
+    <div class="nav-major">项目圣经</div>
+    <a href="#bible-concept" data-nav="bible-concept">🎨 美术圣经</a>
+    <div class="nav-major">主角三人组</div>
+    <a href="#sec-chenxun" data-nav="chenxun">⚔️ 陈寻 · 破魇者</a>
+    <a href="#sec-yexingdeng" data-nav="yexingdeng">🏮 叶行灯 · 提灯人</a>
+    <a href="#sec-xiaoqiao" data-nav="xiaoqiao">☂️ 小乔 · 录名者</a>
+    <div class="nav-major">其他</div>
+    <a href="#sec-scenes" data-nav="scenes">🏛️ 场景设计</a>
+    <a href="#sec-props" data-nav="props">🔧 道具法宝</a>
+  </div>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main" id="top">
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>梦 巡 司</h1>
+    <div class="subtitle">不思异：梦巡司 · 角色造型与视觉资产图集</div>
+    <div class="project-info">民国都市志怪动作奇幻剧 · 东方梦境哥特 Art Deco · 24集 × 8分钟</div>
+  </div>
+
+  <!-- Core Concept -->
+  <div class="concept-block">
+    <div class="definition">「一座民国旧城在血月下逐渐魇化，梦巡司小队以刀、灯、伞进入四桩志怪旧案，在繁华都市的长梦中抢回被抹掉的人名。」</div>
+    <div class="tone-tags">
+      <span>东方梦境哥特</span><span>Art Deco</span><span>民国架空</span><span>志怪奇幻</span><span>血月魇城</span>
+      <span>双男主</span><span>动作爽剧</span><span>繁花美学</span>
+    </div>
+  </div>
+
+  <!-- ═══ 美术圣经 ═══ -->
+  <div class="cat-divider" id="bible-concept">
+    <div class="line"></div><span class="cat-label">美 术 圣 经</span><div class="line"></div>
+  </div>
+
+  <div class="bible-core">
+    <div class="bible-definition">
+      核心视觉定位：<strong>东方梦境哥特 Art Deco</strong> —— 一个黄金时代的东方城市，在繁荣、欲望和记忆侵蚀中逐渐腐败。<br>
+      不是历史复原，不是民国怀旧，不是仙侠幻想，不是蒸汽朋克——是一座被梦境修改后的东方现代文明。
+    </div>
+    <button class="bible-toggle" onclick="toggleBible()" id="bibleToggle">▸ 查阅完整美术圣经</button>
+    <div class="bible-detail" id="bibleDetail">
+      <h4 style="color:#d4c8a8;margin-bottom:12px">📐 美术核心命题</h4>
+      <p><strong>创造「错误历史」</strong>——民国现代化继续发展，东方城市进入黄金时代，人类发现梦境与记忆可以被研究。</p>
+      <p style="margin-top:8px"><strong>空间不是背景，而是角色</strong>——建筑必须回答：谁建造它？为什么存在？保存了什么秘密？</p>
+
+      <h4 style="color:#d4c8a8;margin:20px 0 12px">🎨 色彩体系</h4>
+      <p>午夜蓝（梦境夜晚）· 暗金（黄金时代）· 血红（血月降临）· 烟紫（梦境侵入）· 墨绿（秘密）· 象牙白（人性残留）</p>
+
+      <h4 style="color:#d4c8a8;margin:20px 0 12px">🪨 材质体系</h4>
+      <p>黑色石材（权力与历史）· 黄铜（时间与记忆）· 黑木（东方传统）· 玻璃（现实与幻象）· 丝绒（欲望与腐败）· 旧纸（被修改的历史）</p>
+
+      <h4 style="color:#d4c8a8;margin:20px 0 12px">🏙️ 三层城市系统</h4>
+      <p>一层：繁华城区（剧院/舞厅/酒店/银行/公馆）→ 欲望与财富<br>
+      二层：秘密城区（梦巡司/档案馆/禁梦机构）→ 秩序与控制<br>
+      三层：魇境区域（荒宅/祠堂/废弃街区）→ 被遗忘的记忆</p>
+
+      <h4 style="color:#d4c8a8;margin:20px 0 12px">🌙 梦境设计规则</h4>
+      <p>公式：现实空间 + 人物执念 → 空间变异<br>
+      五种偏移：空间偏移 · 时间偏移 · 物件偏移 · 镜像偏移 · 路径偏移</p>
+
+      <button class="copy-btn" onclick="copyBible()">📋 一键复制圣经全文</button>
+      <span id="copyConfirm" style="font-size:11px;color:rgba(200,170,120,.4);margin-left:12px;display:none">✓ 已复制</span>
+    </div>
+  </div>
+
+  <!-- ═══ 陈寻 ═══ -->
+  <div class="cat-divider" id="bible-chenxun">
+    <div class="line"></div><span class="cat-label">陈 寻 · 破 魇 者</span><div class="line"></div>
+  </div>
+
+  <div class="bible-core">
+    <div class="bible-definition">
+      死亡归来的破魇者。棺中醒来的无名氏，以<strong>刀</strong>斩魇、破核、开门。关键词：黑 · 灰 · 暗金。
+    </div>
+  </div>
+
+  <div id="sec-chenxun"></div>
+  <div class="section-title"><div class="line"></div><span class="label">⚔️ 陈寻 · 造型资产</span><div class="line"></div></div>
+  <div class="card-grid" id="grid-chenxun">
+    <div class="placeholder-card"><div class="text">造型资产待生成</div></div>
+  </div>
+
+  <!-- ═══ 叶行灯 ═══ -->
+  <div class="cat-divider" id="bible-yexingdeng">
+    <div class="line"></div><span class="cat-label">叶 行 灯 · 提 灯 人</span><div class="line"></div>
+  </div>
+
+  <div class="bible-core">
+    <div class="bible-definition">
+      梦境引路人。以<strong>灯</strong>照形、定真，照出「没有脸的人」。关键词：墨绿 · 暗红 · 象牙白。服装具备行动性与工具属性。
+    </div>
+  </div>
+
+  <div id="sec-yexingdeng"></div>
+  <div class="section-title"><div class="line"></div><span class="label">🏮 叶行灯 · 造型资产</span><div class="line"></div></div>
+  <div class="card-grid" id="grid-yexingdeng">
+    <div class="placeholder-card"><div class="text">造型资产待生成</div></div>
+  </div>
+
+  <!-- ═══ 小乔 ═══ -->
+  <div class="cat-divider" id="bible-xiaoqiao">
+    <div class="line"></div><span class="cat-label">小 乔 · 录 名 者</span><div class="line"></div>
+  </div>
+
+  <div class="bible-core">
+    <div class="bible-definition">
+      报馆少女。以<strong>伞</strong>录名、留证，拼出被抹掉的存在。在繁华都市的长梦中，她是那个坚持写下每一个名字的人。
+    </div>
+  </div>
+
+  <div id="sec-xiaoqiao"></div>
+  <div class="section-title"><div class="line"></div><span class="label">☂️ 小乔 · 造型资产</span><div class="line"></div></div>
+  <div class="card-grid" id="grid-xiaoqiao">
+    <div class="placeholder-card"><div class="text">造型资产待生成</div></div>
+  </div>
+
+  <!-- ═══ 场景设计 ═══ -->
+  <div class="cat-divider" id="bible-scenes">
+    <div class="line"></div><span class="cat-label">场 景 设 计</span><div class="line"></div>
+  </div>
+  <div class="bible-core">
+    <div class="bible-definition">
+      梦巡司总部 · 藏梦楼 · 长梦楼 · 血月旧城 · 黄金梦境公馆 · 东方哥特祠堂 · 旧戏院 · 禁梦区域
+    </div>
+  </div>
+  <div id="sec-scenes"></div>
+  <div class="section-title"><div class="line"></div><span class="label">🏛️ 核心场景</span><div class="line"></div></div>
+  <div class="card-grid" id="grid-scenes">
+    <div class="placeholder-card"><div class="text">场景资产待生成</div></div>
+  </div>
+
+  <!-- ═══ 道具法宝 ═══ -->
+  <div class="cat-divider" id="bible-props">
+    <div class="line"></div><span class="cat-label">道 具 法 宝</span><div class="line"></div>
+  </div>
+  <div class="bible-core">
+    <div class="bible-definition">
+      ⚔️ 破魇刀（斩魇破核开门）· 🏮 照形灯（照形定真显形）· ☂️ 录名伞（录名留证拼字）——三件法宝各司其职，不能互相借功能。
+    </div>
+  </div>
+  <div id="sec-props"></div>
+  <div class="section-title"><div class="line"></div><span class="label">🔧 三件法宝</span><div class="line"></div></div>
+  <div class="card-grid" id="grid-props">
+    <div class="placeholder-card"><div class="text">道具资产待生成</div></div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    不思异：梦巡司 · 角色造型与视觉资产图集<br>
+    3 位主角 · 8 大场景 · 3 件法宝 · 资产持续更新中
+  </div>
+
+</div>
+</div>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-nav prev" onclick="navLightbox(-1)">‹</span>
+  <span class="lightbox-nav next" onclick="navLightbox(1)">›</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+// ===== Bible toggle =====
+function toggleBible(){
+  var d=document.getElementById("bibleDetail"),b=document.getElementById("bibleToggle");
+  if(d.classList.contains("active")){d.classList.remove("active");b.innerHTML="▸ 查阅完整美术圣经"}
+  else{d.classList.add("active");b.innerHTML="▾ 收起美术圣经";d.scrollIntoView({behavior:"smooth",block:"nearest"})}
+}
+
+// ===== Copy bible =====
+function copyBible(){
+  var text = document.getElementById("bibleDetail").innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    var c = document.getElementById("copyConfirm");
+    c.style.display = "inline";
+    setTimeout(function(){c.style.display = "none"}, 2000);
+  });
+}
+
+// ===== Lightbox =====
+var currentImages = [];
+var currentIndex = 0;
+
+function openLightbox(img, groupId){
+  var grid = document.getElementById("grid-" + groupId);
+  if(!grid) return;
+  var imgs = grid.querySelectorAll("img");
+  currentImages = Array.from(imgs).map(function(i){return i.src});
+  currentIndex = currentImages.indexOf(img.src);
+  if(currentIndex < 0) currentIndex = 0;
+  showLightbox();
+}
+
+function showLightbox(){
+  document.getElementById("lightboxImg").src = currentImages[currentIndex];
+  document.getElementById("lightbox").classList.add("active");
+}
+
+function closeLightbox(e){
+  if(e && e.target !== document.getElementById("lightbox") && e.target.tagName !== "IMG") return;
+  document.getElementById("lightbox").classList.remove("active");
+}
+
+function navLightbox(dir){
+  currentIndex = (currentIndex + dir + currentImages.length) % currentImages.length;
+  showLightbox();
+}
+
+document.addEventListener("keydown", function(e){
+  if(!document.getElementById("lightbox").classList.contains("active")) return;
+  if(e.key === "Escape") closeLightbox();
+  if(e.key === "ArrowLeft") navLightbox(-1);
+  if(e.key === "ArrowRight") navLightbox(1);
+});
+
+// ===== Scroll spy =====
+var navLinks = document.querySelectorAll(".sidebar-nav a[data-nav]");
+var sectionMap = {
+  "top":"#top",
+  "bible-concept":"#bible-concept",
+  "chenxun":"#sec-chenxun",
+  "yexingdeng":"#sec-yexingdeng",
+  "xiaoqiao":"#sec-xiaoqiao",
+  "scenes":"#sec-scenes",
+  "props":"#sec-props"
+};
+
+window.addEventListener("scroll", function(){
+  var scrollPos = window.scrollY + 120;
+  var current = "top";
+  for(var key in sectionMap){
+    var el = document.querySelector(sectionMap[key]);
+    if(el && el.offsetTop <= scrollPos) current = key;
+  }
+  navLinks.forEach(function(a){
+    a.classList.toggle("active", a.getAttribute("data-nav") === current);
+  });
+});
+</script>
+</body>
+</html>
