@@ -76,6 +76,15 @@ body{background:#0a0a14;color:#ede4d4;font-family:"PingFang SC","Noto Serif SC",
 .lightbox-nav.prev{left:30px}
 .lightbox-nav.next{right:30px}
 
+/* ===== Password Gate ===== */
+.pw-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a14;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.pw-overlay.hidden{display:none}
+.pw-box{text-align:center;padding:60px 40px;border:1px solid rgba(180,160,120,.1);border-radius:8px;background:rgba(255,255,255,.01);max-width:400px}
+.pw-box h2{font-size:28px;color:#e0d4b8;letter-spacing:.15em;margin-bottom:24px;font-weight:400}
+.pw-box input{width:100%;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(180,160,120,.2);border-radius:4px;color:#ede4d4;font-size:16px;text-align:center;font-family:inherit;outline:none;letter-spacing:.1em}
+.pw-box input:focus{border-color:rgba(200,160,80,.4)}
+.pw-box .pw-error{color:rgba(220,140,120,.6);font-size:12px;margin-top:12px;display:none;letter-spacing:.08em}
+
 /* ===== Footer ===== */
 .footer{text-align:center;padding:40px 24px 60px;color:rgba(180,160,120,.3);font-size:11px;letter-spacing:.1em}
 
@@ -85,6 +94,15 @@ body{background:#0a0a14;color:#ede4d4;font-family:"PingFang SC","Noto Serif SC",
 </style>
 </head>
 <body>
+
+<!-- ═══ PASSWORD GATE ═══ -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <h2>梦 巡 司</h2>
+    <input type="password" id="pwInput" placeholder="请输入访问密码" autofocus onkeydown="if(event.key==='Enter')checkPassword()">
+    <div class="pw-error" id="pwError">密码错误，请重试</div>
+  </div>
+</div>
 
 <!-- ═══ SIDEBAR ═══ -->
 <nav class="sidebar" id="sidebar">
@@ -261,6 +279,29 @@ body{background:#0a0a14;color:#ede4d4;font-family:"PingFang SC","Noto Serif SC",
 </div>
 
 <script>
+// ===== Password Gate =====
+(function(){
+  var HASH = "019be397cf10ba2e242d7507db0852b1dcab423c62bd150024ef1333a68136aa";
+  if(sessionStorage.getItem("_pw_ok") === HASH){
+    document.getElementById("pwOverlay").classList.add("hidden");
+    return;
+  }
+  async function sha256(m){var e=new TextEncoder().encode(m);var d=await crypto.subtle.digest("SHA-256",e);return Array.from(new Uint8Array(d)).map(function(b){return b.toString(16).padStart(2,"0")}).join("")}
+  window.checkPassword = function(){
+    var v = document.getElementById("pwInput").value;
+    sha256(v).then(function(h){
+      if(h === HASH){
+        sessionStorage.setItem("_pw_ok", HASH);
+        document.getElementById("pwOverlay").classList.add("hidden");
+        document.getElementById("pwError").style.display = "none";
+      } else {
+        document.getElementById("pwError").style.display = "block";
+        document.getElementById("pwInput").value = "";
+      }
+    });
+  };
+})();
+
 // ===== Bible toggle =====
 function toggleBible(){
   var d=document.getElementById("bibleDetail"),b=document.getElementById("bibleToggle");
