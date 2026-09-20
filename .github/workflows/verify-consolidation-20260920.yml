@@ -1,0 +1,73 @@
+name: Verify approved gallery consolidations 20260920
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/verify-consolidation-20260920.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Verify exact trees, original root files, portal links and publish sizes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import urllib.request,urllib.error,json,base64,os,posixpath
+          from html.parser import HTMLParser
+          from urllib.parse import urlparse,unquote
+          owner='foxmuldery'
+          groups={'bencao-qitan-characters':913,'shikong-scenes':890,'mengxunsi-reference':69,'huzu-scenes':1929}
+          def api(path):
+              req=urllib.request.Request('https://api.github.com/'+path,headers={'Accept':'application/vnd.github+json','Authorization':'Bearer '+os.environ['GH_TOKEN']})
+              with urllib.request.urlopen(req,timeout=60) as r: return json.load(r)
+          def read(repo,path,ref):
+              obj=api('repos/'+owner+'/'+repo+'/contents/'+path+'?ref='+ref)
+              return base64.b64decode(obj['content']).decode('utf-8')
+          class Links(HTMLParser):
+              def __init__(self): super().__init__();self.links=[]
+              def handle_starttag(self,tag,attrs):
+                  for k,v in attrs:
+                      if k in ('src','href') and v:self.links.append(v)
+          reports=[]
+          for repo,expected in groups.items():
+              ref=api('repos/'+owner+'/'+repo+'/git/ref/heads/main')['object']['sha']
+              raw=api('repos/'+owner+'/'+repo+'/git/trees/'+ref+'?recursive=1')
+              if raw.get('truncated'):raise SystemExit('Truncated tree: '+repo)
+              entries={x['path']:x for x in raw['tree']}
+              manifest=json.loads(read(repo,'project/sources.json',ref))
+              failures=[];verified=[]
+              for s in manifest['sources']:
+                  prefix='collections/'+s['slug']
+                  if entries.get(prefix,{}).get('sha')!=s['tree']: failures.append('tree:'+prefix)
+                  files=[(p,x) for p,x in entries.items() if p.startswith(prefix+'/') and x['type']=='blob']
+                  if len(files)!=s['files']: failures.append('count:'+prefix)
+                  if s['repository']==owner+'/'+repo:
+                      for p,x in files:
+                          original=p[len(prefix)+1:]
+                          if entries.get(original,{}).get('sha')!=x['sha']: failures.append('original-root:'+original)
+                  verified.append({'number':s['number'],'files':len(files),'bytes':sum(x.get('size',0) for p,x in files),'sha_verified':entries.get(prefix,{}).get('sha')==s['tree']})
+              if sum(x['files'] for x in verified)!=expected: failures.append('total-count')
+              html=read(repo,'project/index.html',ref); parser=Links();parser.feed(html)
+              for link in parser.links:
+                  u=urlparse(link)
+                  if u.scheme or u.netloc or not u.path:continue
+                  path=posixpath.normpath(posixpath.join('project',unquote(u.path)))
+                  if path not in entries: failures.append('portal-link:'+path)
+              url='https://'+owner+'.github.io/'+repo+'/project/'
+              try:
+                  with urllib.request.urlopen(url,timeout=45) as response:
+                      status=response.status;page=response.read(200000).decode('utf-8')
+                  public_ok=status==200 and manifest['project'] in page
+              except Exception as error:
+                  status=str(error);public_ok=False
+              result={'repository':repo,'verified_main_commit':ref,'sources':verified,'failures':failures,'all_tracked_file_bytes':sum(x.get('size',0) for x in entries.values() if x['type']=='blob'),'source_files':expected,'portal_url':url,'portal_http':status,'portal_title_verified':public_ok,'browser_runtime_tested':False}
+              reports.append(result);print('RESULT '+json.dumps(result,ensure_ascii=False),flush=True)
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('# Approved consolidation verification\n\n```json\n'+json.dumps(reports,ensure_ascii=False,indent=2)+'\n```\n')
+          if any(r['failures'] for r in reports): raise SystemExit('Repository validation failed; see per-repository results')
+          PY
