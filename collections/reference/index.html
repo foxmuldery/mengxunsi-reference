@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>梦巡司 · 视觉参考</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:#0a0a14;color:#ede4d4;font-family:"PingFang SC","Noto Serif SC",serif}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a14}::-webkit-scrollbar-thumb{background:rgba(180,160,120,.25);border-radius:3px}
+.pw-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a14;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.pw-overlay.hidden{display:none}
+.pw-box{text-align:center;padding:60px 40px;border:1px solid rgba(180,160,120,.1);border-radius:8px;background:rgba(255,255,255,.01);max-width:400px}
+.pw-box h2{font-size:28px;color:#e0d4b8;letter-spacing:.15em;margin-bottom:24px;font-weight:400}
+.pw-box input{width:100%;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(180,160,120,.2);border-radius:4px;color:#ede4d4;font-size:16px;text-align:center;font-family:inherit;outline:none}
+.pw-box input:focus{border-color:rgba(200,160,80,.4)}
+.sidebar{position:fixed;top:0;left:0;width:180px;height:100vh;background:linear-gradient(180deg,#0d0d1f 0%,#0a0a14 100%);border-right:1px solid rgba(180,160,120,.08);z-index:100;overflow-y:auto;padding-bottom:40px}
+.sidebar-logo{padding:28px 16px 20px;text-align:center}
+.sidebar-logo .title{font-size:14px;font-weight:700;color:#e0d4b8;letter-spacing:.12em}
+.sidebar-logo .sub{font-size:10px;color:rgba(180,160,120,.4);margin-top:4px}
+.sidebar-nav{padding:0 12px}
+.sidebar-nav a{display:block;padding:6px 12px;font-size:12px;color:rgba(200,180,150,.5);text-decoration:none;border-radius:4px;transition:all .2s}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:#e0d4b8;background:rgba(200,160,80,.08)}
+.sidebar-nav .nav-major{font-size:10px;color:rgba(180,160,120,.35);letter-spacing:.15em;padding:16px 12px 4px;border-top:1px solid rgba(180,160,120,.06);margin-top:4px}
+.main{margin-left:180px;min-height:100vh}
+.hero{padding:50px 0 30px;text-align:center}
+.hero h1{font-size:40px;font-weight:700;color:#e0d4b8;letter-spacing:.2em;text-shadow:0 0 50px rgba(200,160,80,.18)}
+.hero .subtitle{font-size:13px;color:rgba(180,160,120,.45);letter-spacing:.2em;margin-top:8px}
+.cat-divider{max-width:1200px;margin:40px auto 12px;padding:0 24px;display:flex;align-items:center;gap:14px}
+.cat-divider .line{flex:1;height:1px;background:rgba(180,160,120,.06)}
+.cat-divider .cat-label{font-size:12px;letter-spacing:.2em;color:rgba(180,160,120,.3);white-space:nowrap}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px;max-width:1200px;margin:0 auto 30px;padding:0 24px}
+.card{background:#111524;border:1px solid rgba(180,160,120,.06);border-radius:4px;overflow:hidden;cursor:pointer;transition:all .2s}
+.card:hover{border-color:rgba(200,160,80,.15);transform:translateY(-2px)}
+.card img{width:100%;display:block;object-fit:cover}
+.card-info{padding:8px 14px 12px}.card-name{font-size:12px;color:#d4c8a8}
+.lightbox-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.94);z-index:9999;align-items:center;justify-content:center}
+.lightbox-overlay.active{display:flex}
+.lightbox-overlay img{max-width:90vw;max-height:90vh;object-fit:contain}
+.lightbox-close{position:fixed;top:20px;right:30px;font-size:30px;color:rgba(200,180,150,.5);cursor:pointer;z-index:10000}
+.lightbox-close:hover{color:#e0d4b8}
+.lightbox-nav{position:fixed;top:50%;font-size:36px;color:rgba(200,180,150,.3);cursor:pointer;z-index:10000;user-select:none}
+.lightbox-nav:hover{color:#e0d4b8}.lightbox-nav.prev{left:24px}.lightbox-nav.next{right:24px}
+.footer{text-align:center;padding:40px 24px 60px;color:rgba(180,160,120,.25);font-size:11px}
+</style></head>
+<body>
+<div class="pw-overlay" id="pwOverlay"><div class="pw-box"><h2>梦 巡 司</h2><input type="password" id="pwInput" placeholder="请输入访问密码" autofocus onkeydown="if(event.key==='Enter')checkPassword()"><div class="pw-error" id="pwError" style="color:rgba(220,140,120,.6);font-size:12px;margin-top:12px;display:none">密码错误，请重试</div></div></div>
+<nav class="sidebar" id="sidebar"><div class="sidebar-logo"><div class="title">视觉参考</div><div class="sub">梦巡司 · Mood Board</div></div><div class="sidebar-nav" id="sidebarNav"></div></nav>
+<div class="main" id="top"><div class="hero"><h1>梦 巡 司</h1><div class="subtitle">视觉参考 · 电影摄影与美术气氛参考</div></div><div id="content-root"></div><div class="footer">梦巡司 · 视觉参考图集 · 4 组共 67 张</div></div>
+<div class="lightbox-overlay" id="lightbox" onclick="this.classList.remove('active')"><span class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('active')">&times;</span><span class="lightbox-nav prev" onclick="navLightbox(-1)">‹</span><span class="lightbox-nav next" onclick="navLightbox(1)">›</span><img id="lightboxImg" src=""></div>
+<script>
+(function(){var HASH="019be397cf10ba2e242d7507db0852b1dcab423c62bd150024ef1333a68136aa";if(sessionStorage.getItem("_pw_ok")===HASH){document.getElementById("pwOverlay").classList.add("hidden");return}async function sha256(m){var e=new TextEncoder().encode(m);var d=await crypto.subtle.digest("SHA-256",e);return Array.from(new Uint8Array(d)).map(function(b){return b.toString(16).padStart(2,"0")}).join("")}window.checkPassword=function(){var v=document.getElementById("pwInput").value;sha256(v).then(function(h){if(h===HASH){sessionStorage.setItem("_pw_ok",HASH);document.getElementById("pwOverlay").classList.add("hidden")}else{document.getElementById("pwError").style.display="block";document.getElementById("pwInput").value=""}})};})();
+var cats=[{id:"eyes",name:"🎭 Eyes Wide Shut 大开眼界",sec:"sec-eyes"},{id:"ghost",name:"👻 A Ghost Story 鬼故事",sec:"sec-ghost"},{id:"innocents",name:"🕯️ The Innocents 无辜者",sec:"sec-innocents"},{id:"skin",name:"🌙 Mysterious Skin 神秘肌肤",sec:"sec-skin"}];
+var fileMap={"Eyes Wide Shut":"eyes","A Ghost Story":"ghost","The Innocents":"innocents","Mysterious Skin":"skin"};
+var items=[];
+for(var i=1;i<=22;i++)items.push({file:i+" - Eyes Wide Shut.jpg",name:"#"+i+" · Eyes Wide Shut",cat:"eyes"});
+for(var i=23;i<=35;i++)items.push({file:i+" - A Ghost Story.jpg",name:"#"+i+" · A Ghost Story",cat:"ghost"});
+for(var i=36;i<=53;i++)items.push({file:i+" - The Innocents.jpg",name:"#"+i+" · The Innocents",cat:"innocents"});
+for(var i=54;i<=67;i++)items.push({file:i+" - Mysterious Skin.jpg",name:"#"+i+" · Mysterious Skin",cat:"skin"});
+var root=document.getElementById("content-root"),nav=document.getElementById("sidebarNav");
+nav.innerHTML='<a href="#top">▸ 页面顶部</a>';
+cats.forEach(function(c){nav.innerHTML+='<div class="nav-major">'+c.name.split(' ')[0]+'</div><a href="#'+c.sec+'">'+c.name+'</a>';root.insertAdjacentHTML("beforeend",'<div class="cat-divider" id="'+c.sec+'"><div class="line"></div><span class="cat-label">'+c.name+'</span><div class="line"></div></div><div class="card-grid" id="grid-'+c.id+'"></div>');});
+items.forEach(function(it){var g=document.getElementById("grid-"+it.cat);if(!g)return;g.insertAdjacentHTML("beforeend",'<div class="card" onclick="openLightbox(this.querySelector(\'img\'),\''+it.cat+'\')"><img src="'+it.file+'" alt="'+it.name+'" loading="lazy"><div class="card-info"><div class="card-name">'+it.name+'</div></div></div>');});
+var ci=[],cix=0;
+function openLightbox(img,gid){var g=document.getElementById("grid-"+gid);if(!g)return;ci=Array.from(g.querySelectorAll("img")).map(function(i){return i.src});cix=ci.indexOf(img.src);if(cix<0)cix=0;document.getElementById("lightboxImg").src=ci[cix];document.getElementById("lightbox").classList.add("active")}
+function navLightbox(d){cix=(cix+d+ci.length)%ci.length;document.getElementById("lightboxImg").src=ci[cix]}
+document.addEventListener("keydown",function(e){if(!document.getElementById("lightbox").classList.contains("active"))return;if(e.key==="Escape")document.getElementById("lightbox").classList.remove("active");if(e.key==="ArrowLeft")navLightbox(-1);if(e.key==="ArrowRight")navLightbox(1)});
+var nls=document.querySelectorAll(".sidebar-nav a[data-nav]"),sm={"top":"#top"};cats.forEach(function(c){sm[c.id]=("#"+c.sec)});
+window.addEventListener("scroll",function(){var sp=window.scrollY+120,cur="top";for(var k in sm){var el=document.querySelector(sm[k]);if(el&&el.offsetTop<=sp)cur=k}nls.forEach(function(a){a.classList.toggle("active",a.getAttribute("data-nav")===cur)})});
+nls.forEach(function(a){a.setAttribute("data-nav",a.getAttribute("href").replace("#sec-","").replace("#","top"))});
+</script></body></html>
