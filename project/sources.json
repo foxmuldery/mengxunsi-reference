@@ -1,0 +1,32 @@
+{
+  "project": "梦巡司",
+  "target": "foxmuldery/mengxunsi-reference",
+  "status": "complete-source-trees-verified",
+  "sources": [
+    {
+      "number": "061",
+      "slug": "characters",
+      "label": "角色造型",
+      "repository": "foxmuldery/mengxunsi-characters",
+      "commit": "b9004f3e7b8892981a33f5a131571cf19859a0fa",
+      "tree": "c4b6921d6cfff3933fe483ecb3b41a20a4985c3d",
+      "files": 1,
+      "verified_tree": "c4b6921d6cfff3933fe483ecb3b41a20a4985c3d",
+      "entry_exists": true
+    },
+    {
+      "number": "062",
+      "slug": "reference",
+      "label": "视觉参考",
+      "repository": "foxmuldery/mengxunsi-reference",
+      "commit": "faf088f24e35e76e90069312ce2977b8c5676d3d",
+      "tree": "49ac6dd822d5d41143c16d36aaa1c74992944cf1",
+      "files": 68,
+      "verified_tree": "49ac6dd822d5d41143c16d36aaa1c74992944cf1",
+      "entry_exists": true
+    }
+  ],
+  "original_repositories_modified": false,
+  "old_homepage_modified": false,
+  "scope": "Default-branch Git histories and exact file trees; no external databases, browser storage, Releases, or LFS hydration claimed"
+}
